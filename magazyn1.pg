@@ -1,0 +1,74 @@
+.PROGRAM PALETYZACJAKZ
+  
+  POINT magazyn = P41
+  POINT wieza = P40
+  chwytak = 57
+  odleglosc = 90
+  
+  SPEED 90
+  
+  HOME
+  
+  
+FOR i = 1 TO 4
+  JAPPRO SHIFT(magazyn by 0,(i-1)*65,0), odleglosc
+  if sig(57) then 
+  SIGNAL -57
+  end
+  TWAIT 1
+  LMOVE SHIFT(magazyn by 0,(i-1)*65,0)
+  TWAIT 1
+  if sig(-57) then 
+  SIGNAL 57
+  end
+  TWAIT 1
+  LAPPRO SHIFT(magazyn by 0,(i-1)*65,0), odleglosc
+  
+  JAPPRO SHIFT(WIEZA by 0,0,(i-1)*55), odleglosc
+  
+  LMOVE SHIFT(WIEZA by 0,0,(i-1)*55)
+  TWAIT 1
+  if sig(57) then 
+  SIGNAL -57
+  end
+  TWAIT 1
+  LAPPRO SHIFT(WIEZA by 0,0,(i-1)*55), odleglosc
+  LAPPRO SHIFT(WIEZA by odleglosc,0,(i-1)*55), odleglosc
+  
+END
+
+j = 0
+FOR i = 1 TO 4
+  j = 5-i
+  JAPPRO SHIFT(WIEZA by odleglosc,0,(j-1)*55), odleglosc
+  JAPPRO SHIFT(WIEZA by 0,0,(j-1)*55), odleglosc
+  if sig(57) then 
+  SIGNAL -57
+  end
+  TWAIT 1
+  LMOVE SHIFT(WIEZA by 0,0,(j-1)*55)
+  TWAIT 1
+  if sig(-57) then 
+  SIGNAL 57
+  end
+  TWAIT 1
+  LAPPRO SHIFT(WIEZA by 0,0,(j-1)*55), odleglosc
+  
+  JAPPRO SHIFT(magazyn by 0,(j-1)*65,0), odleglosc
+  
+  TWAIT 1
+  LMOVE SHIFT(magazyn by 0,(j-1)*65,0)
+  TWAIT 1
+  if sig(57) then 
+  SIGNAL -57
+  end
+  TWAIT 1
+  LAPPRO SHIFT(magazyn by 0,(j-1)*65,0), odleglosc
+  
+  
+  
+END
+
+  HOME
+.END
+
